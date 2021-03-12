@@ -1,0 +1,66 @@
+blogger_blog_homepage:
+    path:     /home
+    defaults: { _controller: BloggerBlogBundle:Default:index }
+
+blogger_index:
+    path:     /
+    defaults: { _controller: BloggerBlogBundle:Page:index }
+
+
+blogger_about:
+  path:  /about
+  defaults: { _controller: BloggerBlogBundle:Page:about }
+  requirements:
+      _method:  GET
+
+blogger_more:
+    path:  /more/{id}
+    defaults: { _controller: BloggerBlogBundle:Page:more }
+    requirements:
+        _method:  POST
+        id: \d+
+
+
+
+blog_view:
+    path:     /view/{id}
+    defaults: { _controller: BloggerBlogBundle:Page:more }
+    requirements:
+      id: \d+
+
+blog_create:
+    path:     /create/{id}
+    defaults: { _controller: BloggerBlogBundle:Blog:create }
+    requirements:
+      id: \d+
+
+blog_edit:
+    path:     /edit/{id}
+    defaults: { _controller: BloggerBlogBundle:Blog:edit }
+    requirements:
+          id: \d+
+
+blog_delete:
+    path:     /delete/{id}
+    defaults: { _controller: BloggerBlogBundle:Blog:delete }
+    requirements:
+          id: \d+
+
+
+createalbum:
+    path:    /createalbum
+    defaults: {_controller: BloggerBlogBundle:Album:createAlbum}
+    requirements:
+      _method:  GET
+
+editalbum:
+  path:     /editalbum/{id}
+  defaults: { _controller: BloggerBlogBundle:Album:editAlbum }
+  requirements:
+    id: \d+
+
+deletealbum:
+  path:     /deletealbum/{id}
+  defaults: { _controller: BloggerBlogBundle:Album:deleteAlbum }
+  requirements:
+    id: \d+

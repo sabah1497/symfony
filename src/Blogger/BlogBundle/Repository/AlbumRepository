@@ -1,0 +1,21 @@
+<?php
+namespace Blogger\BlogBundle\Repository;
+
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Tests\Fixtures\Entity;
+
+class AlbumRepository extends EntityRepository
+
+{
+    public function findAllOrderedByName()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT * FROM albums ORDER BY title ASC '
+            )
+            ->getResult();
+
+    }
+
+}

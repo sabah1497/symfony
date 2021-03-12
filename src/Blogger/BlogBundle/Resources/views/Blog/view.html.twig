@@ -1,0 +1,13 @@
+{% extends 'BloggerBlogBundle::layout.html.twig' %}
+{% block title %}{{ reviews.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ reviews.title }}</h1>
+    <p>{{ reviews.article|nl2br }}</p>
+        <p><small>Created by {{ reviews.reviewer }} at
+                    {{ reviews.timestamp|date('H:i d/m/y') }}
+    </small>
+    <a href="{{ path('blog_edit',{'id':reviews.reviewId}) }}">edit</a>
+    </p>
+
+{% endblock %}

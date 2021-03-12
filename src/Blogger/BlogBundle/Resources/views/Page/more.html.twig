@@ -1,0 +1,111 @@
+{% extends 'BloggerBlogBundle::layout.html.twig' %}
+
+
+
+    {#{% block title %}{{ posts.title }}{% endblock %}#}
+
+{% block body %}
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Portfolio Item Heading -->
+        <h1 class="my-4">
+            Album Name: {{ posts.title }}
+        </h1>
+
+        <!-- Portfolio Item Row -->
+        <div class="row">
+
+            <div class="col-md-8">
+                <img width="400px" height="600px" style=" display: block; margin-top: 20px; margin-bottom: 20px; margin-left: auto; margin-right: auto;" class="img-thumbnail rounded" src="{{ asset('uploads/images/' ~ posts.image)}}" alt="">
+            </div>
+
+            <div class="col-md-4">
+
+                <h3 class="my-3">Artist: {{ posts.artist }}</h3>
+
+                <h3 class="my-3">Track List</h3>
+                <ul>
+                    {{ posts.trackList }}
+                </ul>
+
+{#                <ul>#}
+
+{#                   <p>Uploaded by: {{ posts.writer }} </p>#}
+{#                </ul>#}
+
+                {% if is_granted('ROLE_USER') %}
+                <a href="{{ path('blog_create', {id : posts.id}) }}" class="btn btn-primary"> Write a Review </a>
+                    {% else %}
+                        <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary"> Login to write a Review </a>
+
+                        {% endif %}
+                <br>
+
+                {% if (is_granted('edit', posts)) %}
+
+
+                    <a href="{{ path('editalbum', {'id': posts.id}) }}" class="card-link">Edit Album</a>
+
+
+                {% endif %}
+
+                {% if (is_granted('delete', posts)) %}
+
+
+                    <a href="{{ path('deletealbum', {'id': posts.id}) }}" class="card-link">Delete Album</a>
+
+
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+    <div class="container">
+    <div class="col-md-4">
+
+       <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        {% for reviews in reviews %}
+
+            <div class="card round" style="margin-top: 20px; margin-bottom: 15px;">
+                <div class="card-body round">
+                    <h5 class="card-title">{{ reviews.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">by: {{ reviews.reviewer }}</h6>
+                    <article><p class="card-text">{{ reviews.article|nl2br }}</p></article>
+
+                    <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 10px;">posted at:{{ reviews.timestamp|date('H:i d/m/y') }}</h6>
+
+                    {% if (is_granted('edit', reviews)) %}
+
+
+                    <a href="{{ path('blog_edit', {'id': reviews.id}) }}" class="card-link">Edit Review</a>
+
+
+                    {% endif %}
+
+                    {% if (is_granted('delete', reviews)) %}
+
+                    <a href="{{ path('blog_delete',{id: reviews.id}) }}" class="card-link">Delete Review</a>
+
+                    {% endif %}
+
+
+
+                </div>
+
+            </div>
+        {% endfor%}
+    </div>
+    </div>
+{% endblock %}

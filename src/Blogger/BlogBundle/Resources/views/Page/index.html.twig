@@ -1,0 +1,65 @@
+{% extends "BloggerBlogBundle::layout.html.twig" %}
+
+{#{% block title %}BloggerBlogBundle:Page:index{% endblock %}#}
+
+
+{% block body %}
+
+    {#<div>#}
+
+        {#{{ post.title }}#}
+
+    {#</div>#}
+    {#<div>#}
+
+        {#{{ post.artist }}#}
+
+    {#</div>#}
+
+
+
+
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Jumbotron Header -->
+        <header class="jumbotron my-4">
+            <h1 class="display-3">Welcome!</h1>
+            <p class="lead">Find out more about the albums listed below by clicking the button below it. Leave a review to tell other users your opinion</p>
+            {#<a href="#" class="btn btn-primary btn-lg">Call to action!</a>#}
+        </header>
+        <!-- Page Features -->
+
+
+        <div class="row text-center ">
+            {% for post in posts %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="{{ asset('uploads/images/' ~ post.image()) }}" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">
+
+                            {{ post.title }}
+
+                        </h4>
+                        <p class="card-text">Artist</p>
+
+                        {{ post.artist }}
+
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('blogger_more', {id : post.id}) }}" class="btn btn-primary">Find Out More!</a>
+                    </div>
+
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+
+        <!-- /.row -->
+    </div>
+
+
+{% endblock %}
